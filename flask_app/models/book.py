@@ -1,5 +1,3 @@
-from flask_bcrypt import Bcrypt        
-bcrypt = Bcrypt(app)  
 from flask import flash
 from flask_app.config.mysqlconnection import connectToMySQL
 class Book:

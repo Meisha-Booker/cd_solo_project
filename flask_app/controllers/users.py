@@ -9,8 +9,8 @@ bcrypt = Bcrypt(app)
 def index():
     return render_template('home.html')
 
-@app.route('/register',methods=['POST'])
-def register():
+@app.route('/create_account',methods=['POST'])
+def create():
     if not User.validate_register(request.form):
         return redirect('/')
     data = { 
