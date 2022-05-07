@@ -42,6 +42,24 @@ class User:
         results = connectToMySQL(cls.db).query_db(query,data)
         return cls(results[0])
 
+    @classmethod
+    def get_user_with_books(cls, data):
+        query = "SELECT * FROM user LEFT JOIN book ON book.user_id = book.id WHERE book.id = %(id)s;"
+        results = connectToMySQL(cls.db).query_db(query,data)
+        print(results)
+        user = cls(results[0])
+        for row in results:
+            book_data = {
+                'id': row['book.id'],
+                'title': row['title'],
+                'author': row['author'],
+                'release_year': int(row['release_year']),
+                'createdAt': row['book.createdAt'],
+                'updatedAt': row['book.updatedAt']
+            }
+            user.book.append(book.Book(book_data))
+        return user
+
     @staticmethod
     def validate_register(user):
         is_valid = True
