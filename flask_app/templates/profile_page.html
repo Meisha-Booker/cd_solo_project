@@ -12,8 +12,8 @@
     <p>A site to track the books you have and want to share with other readers.</p>
     <div>
         <a href="/book/<int:id>">My Books</a>
-        <h1 class="text-center"> Welcome {{user.first_name}}!</h1>
-        <a href="/new/book" class="btn btn-info">Add Book</a>
+        <h1 class="text-center"> Welcome {{user.firstName}}!</h1>
+        <a href="/add/book" class="btn btn-info">Add Book</a>
         <a href="/logout" class="btn btn-info">Logout</a>
     </div>
     <table class="table table-bordered">
@@ -21,15 +21,15 @@
             <th> Title </th>
             <th> Author </th>
             <th> Release Date</th>
-            <!-- <th> Actions</th> -->
+            <th> View All Books in the Bookclub</th>
         </thead>
         <tbody>
             {% for book in all_books %}
             <tr>
                 <td> {{ book.title }} </td>
                 <td> {{ book.author}}</td>
-                <td>{{ book.release_date }}</td>
-                <!-- <td><a href="/book/<int:id>">details</td> -->
+                <td>{{ book.release_year }}</td>
+                <td><a href="/book/<int:id>">details</td>
             </tr>
             {% endfor %}
         </tbody>

@@ -13,7 +13,7 @@ class Book:
 
     @classmethod
     def save(cls,data):
-        query = "INSERT INTO book (title, author, release_year, under_30, date_made, user_id, createdAt, updatedAt) VALUES (%(title)s, %(author)s, %(release_year)s, %(user_id)s, NOW(), NOW());"
+        query = "INSERT INTO book (title, author, release_year, user_id, createdAt, updatedAt) VALUES (%(title)s, %(author)s, %(release_year)s, %(user_id)s, NOW(), NOW());"
         return connectToMySQL(cls.db_name).query_db(query,data)
 
     @classmethod
@@ -22,7 +22,7 @@ class Book:
         results =  connectToMySQL(cls.db_name).query_db(query)
         all_books = []
         for row in results:
-            print(row['release_year'])
+            print(row['title'])
             all_books.append(cls(row))
         return all_books
 

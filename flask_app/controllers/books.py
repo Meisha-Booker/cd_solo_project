@@ -7,8 +7,8 @@ from flask_app.models.user import User
 def create_book():
     if 'user_id' not in session:
         return redirect('/logout')
-    if not Book.validate_book(request.form):
-        return redirect('/new/book')
+    # if not Book.validate_book(request.form):
+    #     return redirect('/new/book')
     data = {
         "title": request.form["title"],
         "author": request.form["author"],
@@ -26,7 +26,7 @@ def add_book():
     data = {
         "id":session['user_id']
     }
-    return render_template('add_book.html', users = User.get_user_with_books(data))
+    return render_template('add_book.html', users= User.get_user_with_books(data))
 
 @app.route('/delete/book/<int:id>')
 def delete_book(id):

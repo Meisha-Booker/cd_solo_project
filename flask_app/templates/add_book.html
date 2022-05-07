@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Women's Bookclub</title>
+</head>
+<body>
+    <h1>Women's Bookclub</h1>
+    <p>Add a book to the club. Your book my get featured for "Book of the Month".</p>
+    <div>
+        <a href="/book/<int:id>">My Books</a>
+        <h1 class="text-center"> Welcome {{ users.firstName }}!</h1>
+        <a href="/profile_page" class="btn btn-info">Profile</a>
+        <a href="/logout" class="btn btn-info">Logout</a>
+    </div>
+    <h1 class="text-center text-primary">Add Book Here</h1>
+    <form action="/create/book" method="post" class="col-4 p-4 my-4 bg-dark text-light mx-auto">
+        {% with messages = get_flashed_messages(category_filter=['book']) %}
+            {% if messages %}
+            <div class="alert alert-danger" role="alert">
+                <strong>Flash AHHHHHHH!!!!</strong>
+                    {% for message in messages %}
+                    <p>{{message}}</p>
+                    {% endfor %}
+            </div>
+            {% endif %}
+        {% endwith %}
+        <div class="form-group">
+            <label for="title">Title:</label><br>
+            <input type="text" name="title">
+        </div>
+        <div class="form-group">
+            <label for="Author">Author:</label><br>
+            <input type="text" name="author">
+        </div>
+        <div class="form-group">
+            <label for="year">Release Year:</label><br>
+            <input type="text" name="release_year">
+        </div>
+        
+        <input type="submit" value="Add Book" class="btn btn-success btn-outline-dark" href="/create/book">
+    </form>
+</body>
+</html>

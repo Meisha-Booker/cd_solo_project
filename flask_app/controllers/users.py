@@ -21,7 +21,7 @@ def register():
     }
     id = User.save(data)
     session['user_id'] = id
-    return redirect('/')
+    return redirect('/profile_page')
 
 @app.route('/login', methods=['POST'])
 def login():
