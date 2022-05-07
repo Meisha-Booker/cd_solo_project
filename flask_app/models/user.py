@@ -44,23 +44,23 @@ class User:
         return cls(results[0])
 
     @staticmethod
-    def validate_register(chef):
+    def validate_register(user):
         is_valid = True
         query = "SELECT * FROM user WHERE email = %(email)s;"
-        results = connectToMySQL(User.db).query_db(query,chef)
+        results = connectToMySQL(User.db).query_db(query,user)
     
-        if not EMAIL_REGEX.match(chef['email']):
+        if not EMAIL_REGEX.match(user['email']):
             flash("Invalid Email!!!","create")
             is_valid=False
-        if len(chef['first_name']) < 2:
+        if len(user['first_name']) < 2:
             flash("First name must be at least 2 characters","create")
             is_valid= False
-        if len(chef['last_name']) < 2:
+        if len(user['last_name']) < 2:
             flash("Last name must be at least 2 characters","create")
             is_valid= False
-        if len(chef['password']) < 8:
+        if len(user['password']) < 8:
             flash("Password must be at least 8 characters","create")
             is_valid= False
-        if chef['password'] != chef['confirm']:
+        if user['password'] != user['confirm']:
             flash("Passwords don't match","create")
         return is_valid
