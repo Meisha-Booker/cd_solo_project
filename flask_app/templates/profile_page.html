@@ -21,7 +21,7 @@
             <th> Title </th>
             <th> Author </th>
             <th> Release Date</th>
-            <th> Actions</th>
+            <!-- <th> Actions</th> -->
         </thead>
         <tbody>
             {% for book in all_books %}
@@ -29,7 +29,7 @@
                 <td> {{ book.title }} </td>
                 <td> {{ book.author}}</td>
                 <td>{{ book.release_date }}</td>
-                <td><a href="/book/<int:id>">details</td>
+                <!-- <td><a href="/book/<int:id>">details</td> -->
             </tr>
             {% endfor %}
         </tbody>

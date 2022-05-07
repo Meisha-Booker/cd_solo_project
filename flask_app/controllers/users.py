@@ -21,7 +21,7 @@ def register():
     }
     id = User.save(data)
     session['user_id'] = id
-    return redirect('/profile_page')
+    return redirect('/')
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -42,7 +42,6 @@ def profile():
     data = {
         'id': session['user_id']
     }
-    
     print("all books: ", Book.get_all())
     return render_template("profile_page.html", user=User.get_user_with_books(data), all_books=Book.get_all())
 

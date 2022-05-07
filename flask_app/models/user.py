@@ -15,12 +15,12 @@ class User:
         self.password = data['password']
         self.createdAt = data['createdAt']
         self.updatedAt = data['updatedAt']
-        self.books = []
+        self.book= []
 
     @classmethod
     def get_all(cls):
         query = "SELECT * FROM user;"
-        results = connectToMySQL(cls.db_name).query_db(query)
+        results = connectToMySQL(cls.db).query_db(query)
         users = []
         for row in results:
             users.append(cls(row))
@@ -28,7 +28,7 @@ class User:
 
     @classmethod
     def save(cls,data):
-        query = "INSERT INTO user (firstName, lastName, email,password) VALUES(%(firstName)s, %(lastName)s, %(email)s,%(password)s)"
+        query = "INSERT INTO user (firstName, lastName, email, password) VALUES(%(firstName)s, %(lastName)s, %(email)s,%(password)s)"
         return connectToMySQL(cls.db).query_db(query,data)
 
     @classmethod
@@ -47,7 +47,7 @@ class User:
 
     @classmethod
     def get_user_with_books(cls, data):
-        query = "SELECT * FROM user LEFT JOIN book ON book.user_id = book.id WHERE book.id = %(id)s;"
+        query = "SELECT * FROM user LEFT JOIN book ON user_id = book.id WHERE user.id = %(id)s;"
         results = connectToMySQL(cls.db).query_db(query,data)
         print(results)
         user = cls(results[0])
@@ -56,11 +56,11 @@ class User:
                 'id': row['book.id'],
                 'title': row['title'],
                 'author': row['author'],
-                'release_year': int(row['release_year']),
+                'release_year': row['release_year'],
                 'createdAt': row['book.createdAt'],
                 'updatedAt': row['book.updatedAt']
             }
-            user.books.append(Book.validate_book(book_data))
+            user.book.append(Book(book_data))
         return user
 
     @staticmethod

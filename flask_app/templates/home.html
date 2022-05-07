@@ -4,25 +4,86 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css')}}" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Women's Bookclub Home</title>
 </head>
 <body>
     <div class="container">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfL6t68QVUZFYxde1_sHs9Kn5O4bLXSjB57g&usqp=CAU" alt="woman reading">
-        <h1>Welcome to our Women's Bookclub!</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+        <div class="header">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfL6t68QVUZFYxde1_sHs9Kn5O4bLXSjB57g&usqp=CAU" alt="woman reading">
+            <h1>Welcome to our Women's Bookclub!</h1>
+            <p>A site to track the books you have and want to share with other readers.</p>
+        </div>
         <div class="main">
-            <h3>Featured Author of the Month: <a href="https://en.wikipedia.org/wiki/Toni_Morrison">Toni Morrison</a></h2>
+            <h3>Featured Author of the Month: <br><a href="https://en.wikipedia.org/wiki/Toni_Morrison">Toni Morrison</a></h2>
             <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae non maiores molestiae ex cumque quisquam</p>
         </div>
         <div class="main">
             <h3>Memeber Choice of the Month: TBA</h2>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlRaeDyQoNlluFh3NibG7F7Ek90GvfOpHS4A&usqp=CAU" alt="member photo">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlRaeDyQoNlluFh3NibG7F7Ek90GvfOpHS4A&usqp=CAU" alt="member photo"><br><br>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis cupiditate molestias ab ratione! Omnis cum ut veritatis sit culpa accusamus at mollitia! Delectus beatae suscipit in numquam tempore obcaecati unde!</p>
         </div>
         <div class="main">
-            <input type="submit" value="Register" href="/register" class="btn btn-primary">
-            <input type="submit" value="Login" href="/login" class="btn btn-success">
+            <h3>Click Below to either Register or Login with us.</h3>
+            <div class="d-flex justify-content-around">
+                <form action="/register" method="post" class="col-6 p-4 bg-dark text-light">
+                    <h2 class="text-primary">Create Account</h2>
+                    {% with messages = get_flashed_messages(category_filter=['register']) %}
+                        {% if messages %}
+                        <div class="alert alert-danger" role="alert">
+                            <strong>Flash AHHHHHHH!!!!</strong>
+                                {% for message in messages %}
+                                <p>{{message}}</p>
+                                {% endfor %}
+                        </div>
+                        {% endif %}
+                    {% endwith %}
+                    <div class="form-group">
+                        <label for="firstName">First Name:</label>
+                        <input type="text" name="firstName" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name:</label>
+                        <input type="text" name="lastName" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="text" name="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm">Confirm Password:</label>
+                        <input type="password" name="confirm" class="form-control">
+                    </div>
+                    <input type="submit" value="Submit" href="/profile_page" class="btn btn-primary">
+                </form>
+                <form action="/login" method="post" class="col-6 p-4 bg-dark text-light">
+                    <h2 class="text-success">Login</h2>
+                    {% with messages = get_flashed_messages(category_filter=['login']) %}
+                        {% if messages %}
+                        <div class="alert alert-danger" role="alert">
+                            <strong>Flash AHHHHHHH!!!!</strong>
+                                {% for message in messages %}
+                                <p>{{message}}</p>
+                                {% endfor %}
+                        </div>
+                        {% endif %}
+                    {% endwith %}
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="text" name="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" class="form-control">
+                    </div>
+                    <input type="submit" value="Login" href="/profile_page" class="btn btn-success">
+                </form>
+            </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
