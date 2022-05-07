@@ -3,9 +3,7 @@ bcrypt = Bcrypt(app)
 from flask import flash
 
 class Book:
-    # Other Burger methods up yonder.
-    # Static methods don't have self or cls passed into the parameters.
-    # We do need to take in a parameter to represent our burger
+    
     
     
     
