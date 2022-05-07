@@ -1,15 +1,16 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
-from flask_app.models import book
+from flask_app.models.book import Book
 import re	
  
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$') 
 class User:
     db = "solo_project"
+    
     def __init__(self,data):
         self.id = data['id']
-        self.first_name = data['first_name']
-        self.last_name = data['last_name']
+        self.firstName = data['firstName']
+        self.lastName = data['lastName']
         self.email = data['email']
         self.password = data['password']
         self.createdAt = data['createdAt']
@@ -27,7 +28,7 @@ class User:
 
     @classmethod
     def save(cls,data):
-        query = "INSERT INTO user (first_name,last_name,email,password) VALUES(%(first_name)s,%(last_name)s,%(email)s,%(password)s)"
+        query = "INSERT INTO user (firstName, lastName, email,password) VALUES(%(firstName)s, %(lastName)s, %(email)s,%(password)s)"
         return connectToMySQL(cls.db).query_db(query,data)
 
     @classmethod
@@ -59,7 +60,7 @@ class User:
                 'createdAt': row['book.createdAt'],
                 'updatedAt': row['book.updatedAt']
             }
-            user.books.append(book.Book(book_data))
+            user.books.append(Book.validate_book(book_data))
         return user
 
     @staticmethod
@@ -69,17 +70,17 @@ class User:
         results = connectToMySQL(User.db).query_db(query,user)
     
         if not EMAIL_REGEX.match(user['email']):
-            flash("Invalid Email!!!","create")
+            flash("Invalid Email!!!","register")
             is_valid=False
-        if len(user['first_name']) < 2:
-            flash("First name must be at least 2 characters","create")
+        if len(user['firstName']) < 2:
+            flash("First name must be at least 2 characters","register")
             is_valid= False
-        if len(user['last_name']) < 2:
-            flash("Last name must be at least 2 characters","create")
+        if len(user['lastName']) < 2:
+            flash("Last name must be at least 2 characters","register")
             is_valid= False
         if len(user['password']) < 8:
-            flash("Password must be at least 8 characters","create")
+            flash("Password must be at least 8 characters","register")
             is_valid= False
         if user['password'] != user['confirm']:
-            flash("Passwords don't match","create")
+            flash("Passwords don't match","register")
         return is_valid

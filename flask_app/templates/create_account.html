@@ -9,9 +9,9 @@
 </head>
 <body>
     <div class="d-flex justify-content-around">
-        <form action="/create_account" method="post" class="col-4 p-4 bg-dark text-light">
+        <form action="/register" method="post" class="col-4 p-4 bg-dark text-light">
             <h2 class="text-primary">Create an Account</h2>
-            {% with messages = get_flashed_messages(category_filter=['create']) %}
+            {% with messages = get_flashed_messages(category_filter=['register']) %}
                 {% if messages %}
                 <div class="alert alert-danger" role="alert">
                     <strong>Flash AHHHHHHH!!!!</strong>

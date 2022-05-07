@@ -1,7 +1,7 @@
 from flask import flash
 from flask_app.config.mysqlconnection import connectToMySQL
 class Book:
-    db_name = 'solo_project'
+    db_name = 'solo_project_schema'
     
     def __init__(self, db_data):
         self.id = db_data['id']

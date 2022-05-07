@@ -9,13 +9,13 @@ bcrypt = Bcrypt(app)
 def index():
     return render_template('home.html')
 
-@app.route('/create_account', methods=['POST'])
-def create_account():
+@app.route('/register', methods=['POST'])
+def register():
     if not User.validate_register(request.form):
-        return redirect('/home')
+        return redirect('/')
     data = { 
-        "first_name": request.form['first_name'],
-        "last_name": request.form['last_name'],
+        "firstName": request.form['firstName'],
+        "lastName": request.form['lastName'],
         "email": request.form['email'],
         "password": bcrypt.generate_password_hash(request.form['password'])
     }
@@ -23,7 +23,7 @@ def create_account():
     session['user_id'] = id
     return redirect('/profile_page')
 
-@app.route('/login',methods=['POST'])
+@app.route('/login', methods=['POST'])
 def login():
     user = User.get_by_email(request.form)
     if not user:
