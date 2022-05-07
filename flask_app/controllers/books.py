@@ -11,10 +11,9 @@ def create_book():
     if not Book.validate_tree(request.form):
         return redirect('/new/book')
     data = {
-        "species": request.form["species"],
-        "location": request.form["location"],
-        "reason": request.form["reason"],
-        "date_planted": request.form["date_planted"],
+        "title": request.form["title"],
+        "author": request.form["author"],
+        "release_year": request.form["release_year"],
         "user_id": session["user_id"]
     }
     Book.save(data)
