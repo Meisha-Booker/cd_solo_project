@@ -1,5 +1,6 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
+from flask_app.models import book
 import re	
  
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$') 
@@ -13,6 +14,7 @@ class User:
         self.password = data['password']
         self.createdAt = data['createdAt']
         self.updatedAt = data['updatedAt']
+        self.books = []
 
     @classmethod
     def get_all(cls):
@@ -57,7 +59,7 @@ class User:
                 'createdAt': row['book.createdAt'],
                 'updatedAt': row['book.updatedAt']
             }
-            user.book.append(book.Book(book_data))
+            user.books.append(book.Book(book_data))
         return user
 
     @staticmethod
