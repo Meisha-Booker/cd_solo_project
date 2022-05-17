@@ -36,7 +36,7 @@ class Book:
     def update(cls, data):
         query = "UPDATE book SET title=%(title)s, author=%(author)s, release_year=%(release_year)s, updatedAt=NOW() WHERE id = %(id)s;"
         return connectToMySQL(cls.db_name).query_db(query,data)
-    
+
     @classmethod
     def delete(cls,data):
         query = "DELETE FROM book WHERE id = %(id)s;"

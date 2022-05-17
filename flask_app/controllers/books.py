@@ -33,6 +33,18 @@ def view_books():
     books = Book.get_all()
     return render_template('view_books.html', books=books, user=User.get_by_id({"id": session['user_id']}))
 
+@app.route('/edit/book/<int:id>')
+def edit_book(id):
+    if 'user_id' not in session:
+        return redirect('/logout')
+    data = {
+        "id":id
+    }
+    user_data = {
+        "id":session['user_id']
+    }
+    return render_template("edit_book.html", edit=Book.get_one(data), user=User.get_by_id(user_data))
+
 @app.route('/delete/book/<int:id>')
 def delete_book(id):
     if 'user_id' not in session:
