@@ -47,7 +47,7 @@ class User:
 
     @classmethod
     def get_user_with_books(cls, data):
-        query = "SELECT * FROM user LEFT JOIN book ON user_id = book.id WHERE user.id = %(id)s;"
+        query = "SELECT * FROM user LEFT JOIN book ON user.id = book.user_id WHERE user.id = %(id)s;"
         results = connectToMySQL(cls.db).query_db(query,data)
         print(results)
         user = cls(results[0])
