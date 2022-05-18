@@ -42,7 +42,6 @@ def profile():
     data = {
         'id': session['user_id']
     }
-    # print("all books: ", Book.get_all())
     return render_template("profile_page.html",  user=User.get_user_with_books(data))
 
 @app.route('/logout')
